@@ -1,0 +1,121 @@
+{
+  "meta": {
+    "project": "EduAlert UENR Group 27",
+    "script": "c:\\Users\\koran\\Desktop\\GROUP 27\\eduAlert\\train_model.py",
+    "artifacts_dir": "c:\\Users\\koran\\Desktop\\GROUP 27\\eduAlert\\model_artifacts",
+    "train_seconds": 50.4
+  },
+  "datasets": {
+    "UCI Student Performance": {
+      "rows": 1044,
+      "dropout_rate": 0.2203
+    },
+    "UCI Dropout 2022": {
+      "rows": 2000,
+      "dropout_rate": 0.094
+    },
+    "OULAD": {
+      "rows": 5000,
+      "dropout_rate": 0.0976
+    },
+    "EduAlert Synthetic": {
+      "rows": 1200,
+      "dropout_rate": 0.145
+    }
+  },
+  "combined": {
+    "total": 9244,
+    "dropout_rate": 0.1168,
+    "train": 7395,
+    "test": 1849
+  },
+  "features": {
+    "count": 13,
+    "names": [
+      "gpa",
+      "attendance",
+      "credit_ratio",
+      "failed_modules",
+      "gpa_norm",
+      "att_norm",
+      "risk_composite",
+      "financial_flag",
+      "repeated_course",
+      "probation",
+      "level",
+      "semester",
+      "programme_enc"
+    ]
+  },
+  "cross_validation": {
+    "Random Forest": {
+      "mean": 0.9557,
+      "std": 0.0054
+    },
+    "Gradient Boosting": {
+      "mean": 0.9557,
+      "std": 0.0067
+    },
+    "Logistic Regression": {
+      "mean": 0.9472,
+      "std": 0.0031
+    }
+  },
+  "test_evaluation": {
+    "Random Forest": {
+      "accuracy": 0.9367,
+      "precision": 0.7324,
+      "recall": 0.7222,
+      "f1": 0.9365,
+      "auc_roc": 0.9599,
+      "TP": 156,
+      "TN": 1576,
+      "FP": 57,
+      "FN": 60,
+      "cv_auc": 0.9557
+    },
+    "Gradient Boosting": {
+      "accuracy": 0.9335,
+      "precision": 0.7688,
+      "recall": 0.6157,
+      "f1": 0.9302,
+      "auc_roc": 0.9615,
+      "TP": 133,
+      "TN": 1593,
+      "FP": 40,
+      "FN": 83,
+      "cv_auc": 0.9557
+    },
+    "Logistic Regression": {
+      "accuracy": 0.8675,
+      "precision": 0.4638,
+      "recall": 0.8611,
+      "f1": 0.8834,
+      "auc_roc": 0.9442,
+      "TP": 186,
+      "TN": 1418,
+      "FP": 215,
+      "FN": 30,
+      "cv_auc": 0.9472
+    }
+  },
+  "best_model": {
+    "name": "Gradient Boosting",
+    "auc_roc": 0.9615
+  },
+  "feature_importance": {
+    "risk_composite": 0.628554,
+    "credit_ratio": 0.110927,
+    "gpa": 0.054124,
+    "gpa_norm": 0.05068,
+    "attendance": 0.037769,
+    "att_norm": 0.033474,
+    "financial_flag": 0.024267,
+    "level": 0.021755,
+    "failed_modules": 0.013279,
+    "programme_enc": 0.012531,
+    "repeated_course": 0.008552,
+    "semester": 0.003502,
+    "probation": 0.000586
+  }
+}

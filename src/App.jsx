@@ -57,7 +57,7 @@ const TH = {
 };
 
 // ─── API LAYER ────────────────────────────────────────────────────────────────
-const API_BASE = "http://localhost:8000";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8000";
 const UENR_LOGO = "/uenr-logo.png";
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -2867,7 +2867,7 @@ function PredictPage({ t, students, setStudents, setActive, logActivity = () => 
   const filtered = bRes.filter(s => bFilt === "all" || (bFilt === "high" && s.predicted >= .7) || (bFilt === "moderate" && s.predicted >= .4 && s.predicted < .7) || (bFilt === "low" && s.predicted < .4)).sort((a, b) => bSort === "risk" ? b.predicted - a.predicted : bSort === "gpa" ? b.gpa - a.gpa : a.name.localeCompare(b.name));
   const iS = k => ({ width: "100%", padding: "9px 12px", background: t.inputBg, border: "1px solid " + (errs[k] ? t.danger : t.border2), borderRadius: 8, color: t.text, fontSize: 13 });
   async function runManual() {
-    if (!validate()) return;
+    if (!validate()) { toast("Please fill in all required fields", "error"); return; }
     setLoading(true);
     const startedAt = Date.now();
     const MIN_PREDICT_MS = 10000;
@@ -2928,7 +2928,7 @@ function PredictPage({ t, students, setStudents, setActive, logActivity = () => 
               <div style={{ fontSize: 11, fontWeight: 700, color: t.accent, letterSpacing: ".07em", textTransform: "uppercase", marginBottom: 12 }}>Personal Details</div>
               <div style={{ display: "grid", gridTemplateColumns: "110px 1fr", gap: 10, marginBottom: 12 }}>
                 <div><label style={{ display: "block", fontSize: 12, fontWeight: 600, color: t.textSub, marginBottom: 5 }}>Title</label><select value={form.title} onChange={setF("title")} style={{ ...iS("title"), cursor: "pointer" }}>{"-,Dr.,Prof.,Mr.,Mrs.,Ms.,Rev.,Eng.,Hon.".split(",").map(o => <option key={o} value={o === "-" ? "" : o}>{o}</option>)}</select></div>
-                <div><label style={{ display: "block", fontSize: 12, fontWeight: 600, color: t.textSub, marginBottom: 5 }}>Full Name</label><input value={form.name} onChange={setF("name")} placeholder="e.g. Kwame Boateng" style={iS("name")} /></div>
+                <div><label style={{ display: "block", fontSize: 12, fontWeight: 600, color: t.textSub, marginBottom: 5 }}>Full Name</label><input value={form.name} onChange={setF("name")} placeholder="e.g. Kwame Boateng" style={iS("name")} />{errs.name && <div style={{ fontSize: 11, color: t.danger, marginTop: 3 }}>{errs.name}</div>}</div>
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
                 <div><label style={{ display: "block", fontSize: 12, fontWeight: 600, color: t.textSub, marginBottom: 5 }}>Student ID</label><input value={form.id} onChange={setF("id")} placeholder="UEN/XX/XXXX/XXX" style={iS("id")} /></div>
@@ -3590,7 +3590,7 @@ function AuthScreen({ onLogin, t }) {
   const [newPass, setNewPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
 
-  const API = "http://localhost:8000";
+  const API = API_BASE;
   const iS = { width: "100%", padding: "10px 13px", background: t.inputBg, border: "1px solid " + t.border2, borderRadius: 8, color: t.text, fontSize: 14 };
   const errS = { fontSize: 12, color: t.danger, marginTop: 4 };
 

@@ -46,11 +46,11 @@ from db import (
 # ── Environment ────────────────────────────────────────────────────────────────
 load_dotenv()
 
-SECRET_KEY     = os.getenv("SECRET_KEY", "CHANGE-THIS-IN-PRODUCTION-use-a-long-random-string")
+SECRET_KEY     = os.getenv("SECRET_KEY") or os.getenv("JWT_SECRET", "CHANGE-THIS-IN-PRODUCTION-use-a-long-random-string")
 ALGORITHM      = "HS256"
 TOKEN_EXPIRE_H = 8
 REFRESH_TOKEN_EXPIRE_DAYS = 7
-ALLOWED_ORIGIN = os.getenv("ALLOWED_ORIGIN", "http://localhost:5173")
+ALLOWED_ORIGIN = os.getenv("ALLOWED_ORIGIN", "")
 MODEL_DIR      = os.getenv("MODEL_DIR", "model_artifacts")
 SENDGRID_KEY   = os.getenv("SENDGRID_API_KEY", "")
 EMAIL_FROM     = os.getenv("FROM_EMAIL", "vincent.korang.stu@uenr.edu.gh")
@@ -307,9 +307,13 @@ app = FastAPI(
 )
 
 # ── CORS ───────────────────────────────────────────────────────────────────────
+_cors_origins = [o.strip() for o in ALLOWED_ORIGIN.split(",") if o.strip()] or [
+    "http://localhost:5173",
+    "http://localhost:3000",
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[ALLOWED_ORIGIN, "http://localhost:5173"],
+    allow_origins=_cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -49,4 +49,4 @@ sendgrid==6.11.0
 # ── SHAP explainability (optional — for real per-prediction SHAP values) ──────
 # Currently EduAlert uses a fast SHAP proxy formula.
 # Uncomment this for real SHAP explanations (~2s added per prediction):
- shap==0.45.1
+shap==0.45.1

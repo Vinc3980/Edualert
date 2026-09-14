@@ -33,6 +33,8 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Depends, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
 from jose import JWTError, jwt
@@ -1048,3 +1050,16 @@ async def seed_advisor(payload: UserCreate, admin: dict = Depends(get_current_ad
         "created":   datetime.utcnow(),
     })
     return {"message": f"Account created for {payload.email}"}
+
+# ── Serve Frontend (static SPA) ────────────────────────────────────────────────
+import pathlib
+_STATIC_DIR = pathlib.Path(__file__).parent / "static"
+if _STATIC_DIR.is_dir():
+    app.mount("/assets", StaticFiles(directory=str(_STATIC_DIR / "assets")), name="static-assets")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_spa(full_path: str):
+        file_path = _STATIC_DIR / full_path
+        if file_path.is_file():
+            return FileResponse(str(file_path))
+        return FileResponse(str(_STATIC_DIR / "index.html"))

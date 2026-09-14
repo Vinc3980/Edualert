@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "EduAlert UENR Group 27",
-    "script": "c:\\Users\\koran\\Desktop\\GROUP 27\\eduAlert\\train_model.py",
-    "artifacts_dir": "c:\\Users\\koran\\Desktop\\GROUP 27\\eduAlert\\model_artifacts",
-    "train_seconds": 50.4
+    "script": "C:\\Users\\koran\\Desktop\\GROUP 27\\eduAlert\\train_model.py",
+    "artifacts_dir": "C:\\Users\\koran\\Desktop\\GROUP 27\\eduAlert\\model_artifacts",
+    "train_seconds": 31.7
   },
   "datasets": {
     "UCI Student Performance": {
@@ -49,73 +49,73 @@
   },
   "cross_validation": {
     "Random Forest": {
-      "mean": 0.9557,
-      "std": 0.0054
+      "mean": 0.9556,
+      "std": 0.0055
     },
     "Gradient Boosting": {
-      "mean": 0.9557,
-      "std": 0.0067
+      "mean": 0.9568,
+      "std": 0.0063
     },
     "Logistic Regression": {
       "mean": 0.9472,
-      "std": 0.0031
+      "std": 0.003
     }
   },
   "test_evaluation": {
     "Random Forest": {
-      "accuracy": 0.9367,
-      "precision": 0.7324,
+      "accuracy": 0.9362,
+      "precision": 0.729,
       "recall": 0.7222,
-      "f1": 0.9365,
-      "auc_roc": 0.9599,
+      "f1": 0.9361,
+      "auc_roc": 0.9609,
       "TP": 156,
-      "TN": 1576,
-      "FP": 57,
+      "TN": 1575,
+      "FP": 58,
       "FN": 60,
-      "cv_auc": 0.9557
+      "cv_auc": 0.9556
     },
     "Gradient Boosting": {
-      "accuracy": 0.9335,
-      "precision": 0.7688,
-      "recall": 0.6157,
-      "f1": 0.9302,
-      "auc_roc": 0.9615,
-      "TP": 133,
-      "TN": 1593,
-      "FP": 40,
-      "FN": 83,
-      "cv_auc": 0.9557
+      "accuracy": 0.9346,
+      "precision": 0.7596,
+      "recall": 0.6435,
+      "f1": 0.9322,
+      "auc_roc": 0.9605,
+      "TP": 139,
+      "TN": 1589,
+      "FP": 44,
+      "FN": 77,
+      "cv_auc": 0.9568
     },
     "Logistic Regression": {
-      "accuracy": 0.8675,
-      "precision": 0.4638,
-      "recall": 0.8611,
-      "f1": 0.8834,
-      "auc_roc": 0.9442,
-      "TP": 186,
-      "TN": 1418,
-      "FP": 215,
-      "FN": 30,
+      "accuracy": 0.8653,
+      "precision": 0.4591,
+      "recall": 0.8565,
+      "f1": 0.8816,
+      "auc_roc": 0.9446,
+      "TP": 185,
+      "TN": 1415,
+      "FP": 218,
+      "FN": 31,
       "cv_auc": 0.9472
     }
   },
   "best_model": {
-    "name": "Gradient Boosting",
-    "auc_roc": 0.9615
+    "name": "Random Forest",
+    "auc_roc": 0.9609
   },
   "feature_importance": {
-    "risk_composite": 0.628554,
-    "credit_ratio": 0.110927,
-    "gpa": 0.054124,
-    "gpa_norm": 0.05068,
-    "attendance": 0.037769,
-    "att_norm": 0.033474,
-    "financial_flag": 0.024267,
-    "level": 0.021755,
-    "failed_modules": 0.013279,
-    "programme_enc": 0.012531,
-    "repeated_course": 0.008552,
-    "semester": 0.003502,
-    "probation": 0.000586
+    "risk_composite": 0.34446,
+    "gpa_norm": 0.167087,
+    "gpa": 0.156312,
+    "credit_ratio": 0.095135,
+    "att_norm": 0.066789,
+    "attendance": 0.0656,
+    "probation": 0.030968,
+    "failed_modules": 0.018704,
+    "financial_flag": 0.018367,
+    "programme_enc": 0.013496,
+    "level": 0.009439,
+    "semester": 0.008107,
+    "repeated_course": 0.005536
   }
 }
